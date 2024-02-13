@@ -9,22 +9,26 @@
     "richtext"
   ],
   "homepage": "http://draftjs.org/",
-  "bugs": "https://github.com/facebook/draft-js/issues",
+  "bugs": "https://github.com/penpot/draft-js/issues",
   "files": [
     "dist/",
     "lib/",
     "LICENSE"
   ],
+  "directories": {
+    "lib": "./lib"
+  },
   "main": "lib/Draft.js",
   "style": "dist/Draft.css",
-  "repository": "facebook/draft-js",
+  "repository": "penpot/draft-js",
   "license": "MIT",
   "scripts": {
     "prepublish": "npm run build",
     "pretest": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
-    "build": "gulp",
-    "dev": "gulp dev",
-    "postbuild": "node node_modules/fbjs-scripts/node/check-lib-requires.js lib",
+    "build": "echo 'Hello, World!'",
+    "gulp:build": "gulp",
+    "gulp:dev": "gulp dev",
+    "node:postbuild": "node node_modules/fbjs-scripts/node/check-lib-requires.js lib",
     "lint": "eslint .",
     "lint-docs": "alex . && yarn format-docs:diff",
     "format": "eslint . --fix",

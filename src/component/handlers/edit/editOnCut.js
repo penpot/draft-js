@@ -16,6 +16,8 @@ import type DraftEditor from 'DraftEditor.react';
 const DraftModifier = require('DraftModifier');
 const EditorState = require('EditorState');
 const Style = require('Style');
+const React = require('React');
+const ReactDOM = require('ReactDOM');
 
 const getFragmentFromSelection = require('getFragmentFromSelection');
 const getScrollPosition = require('getScrollPosition');
@@ -56,8 +58,14 @@ function editOnCut(editor: DraftEditor, e: SyntheticClipboardEvent<>): void {
   editor.setMode('cut');
 
   // Let native `cut` behavior occur, then recover control.
+  
+  // NOTE: The 0.11.7 version of this uses `setTimeout` to ensure 
+  // that the `cut` event is completely finished before we continue
+  // but I think this is somehow conflicting with the React 18 reconciler.
   setTimeout(() => {
-    editor.restoreEditorDOM(scrollPosition);
+    ReactDOM.flushSync(() => {
+      editor.restoreEditorDOM(scrollPosition);
+    });
     editor.exitCurrentMode();
     editor.update(removeFragment(editorState));
   }, 0);

@@ -573,6 +573,7 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
     }
 
     if (onCut) {
+      console.log(onCut)
       editHandler.onCut = onCut;
     }
 
